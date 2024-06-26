@@ -1,0 +1,16 @@
+<launch>
+  <!--Urdf file path-->
+  <param name="robot_description" textfile="$(find urdf12)/urdf/urdf12.urdf"/>
+  
+  <node name="tf_footprint_base" pkg="tf" type="static_transform_publisher" args="0 0 0 0 0 0 base_link base_footprint 40" />
+  <node pkg="tf" type="static_transform_publisher" name="base_link_to_laser" args="0 0 0 0 0 0 lidar laser 40" />
+  <node pkg="tf" type="static_transform_publisher" name="imu_broadcaster" args="0 0 0.22 0 0 0 base_link imu 40" />  
+  
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false" output="screen"/>
+    
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+  
+    <node pkg="rviz" type="rviz" name="rviz">
+  </node>
+  
+  </launch>
